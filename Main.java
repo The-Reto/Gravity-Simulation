@@ -1,5 +1,5 @@
-import graph.Windows.MainWindow;
-import phys.*;
+import Graphics.Windows.MainWindow;
+import Physics.*;
 
 public class Main {
 

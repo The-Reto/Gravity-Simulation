@@ -1,6 +1,6 @@
-package graph.UI;
+package Graphics.UI;
 
-import graph.Graphics.WorldView;
+import Graphics.Graphics.WorldView;
 
 import java.awt.*;
 

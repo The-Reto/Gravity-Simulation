@@ -1,7 +1,7 @@
-package graph.Graphics;
+package Graphics.Graphics;
 
-import phys.Essentials.PhysicsEvent;
-import phys.PhysicsWorld;
+import Physics.Essentials.PhysicsEvent;
+import Physics.PhysicsWorld;
 
 import java.awt.*;
 

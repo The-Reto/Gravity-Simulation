@@ -1,4 +1,4 @@
-package graph.Graphics;
+package Graphics.Graphics;
 
 import java.awt.image.BufferedImage;
 

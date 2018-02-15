@@ -1,8 +1,8 @@
-package graph.UI;
+package Graphics.UI;
 
-import graph.Windows.NewMassSphereWindow;
-import phys.Essentials.PhysicsConstant;
-import phys.PhysicsWorld;
+import Graphics.Windows.NewMassSphereWindow;
+import Physics.Essentials.PhysicsConstant;
+import Physics.PhysicsWorld;
 
 import java.awt.*;
 
