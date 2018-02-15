@@ -1,16 +1,17 @@
 package Physics;
 
+import Graphics.Graphics.AlwaysDraw;
 import Graphics.Graphics.Drawable;
 import Physics.Essentials.Vector;
 
 import java.awt.*;
 
-public class DataDisplay<t> extends PhysicsObject implements Drawable {
+public class DataDisplay<t> extends PhysicsObject implements Drawable, AlwaysDraw {
     public String title;
     public t data;
 
     DataDisplay(String title, Vector pos, t data){
-        super(pos, false);
+        super(new Vector(pos.getX(), pos.getY(), Double.POSITIVE_INFINITY), false);
         this.title = title;
         this.data = data;
     }

@@ -83,6 +83,11 @@ public class MassSphere extends PhysicsObject implements Massive {
     }
 
     public void draw(Graphics g){
-        if(!deactivated) g.drawOval((int) ((this.getPos().getX()-radius) / PhysicsWorld.meterPerUnit), (int) ((this.getPos().getY()-radius) / PhysicsWorld.meterPerUnit),(int) (2*radius / PhysicsWorld.meterPerUnit), (int)(2*radius / PhysicsWorld.meterPerUnit));
+        if(!deactivated) {
+            g.setColor(Color.BLACK);
+            g.fillOval((int) ((this.getPos().getX()-radius) / PhysicsWorld.meterPerUnit), (int) ((this.getPos().getY()-radius) / PhysicsWorld.meterPerUnit),(int) (2*radius / PhysicsWorld.meterPerUnit), (int)(2*radius / PhysicsWorld.meterPerUnit));
+            g.setColor(Color.WHITE);
+            g.drawOval((int) ((this.getPos().getX()-radius) / PhysicsWorld.meterPerUnit), (int) ((this.getPos().getY()-radius) / PhysicsWorld.meterPerUnit),(int) (2*radius / PhysicsWorld.meterPerUnit), (int)(2*radius / PhysicsWorld.meterPerUnit));
+        }
     }
 }

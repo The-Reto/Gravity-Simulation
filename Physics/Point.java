@@ -1,12 +1,13 @@
 package Physics;
 
+import Graphics.Graphics.AlwaysDraw;
 import Graphics.Graphics.Drawable;
 import Physics.Essentials.Vector;
 
 import java.awt.*;
 import java.util.ArrayList;
 
-public abstract class Point extends PhysicsObject implements Drawable{
+public abstract class Point extends PhysicsObject implements Drawable, AlwaysDraw{
 
     private Color myColor;
     private int size;

@@ -26,7 +26,7 @@ public class MainWindow extends Window {
 		ArrayList<UIpanel> list = new ArrayList<>();
 		list.add(new PhysicsUI(world));
 		list.add(new GeneralUI(worldView));
-		Graphics.UI.UIview UIview = new UIview(list, size_UI, size_Y);
+		UIview UIview = new UIview(list, size_UI, size_Y);
 
 		this.add(UIview, BorderLayout.EAST);
 		this.add(worldView, BorderLayout.CENTER);

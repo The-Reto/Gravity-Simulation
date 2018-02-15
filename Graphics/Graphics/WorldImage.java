@@ -1,6 +1,11 @@
 package Graphics.Graphics;
 
+import Physics.PhysicsObject;
+
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 class WorldImage {
 
@@ -23,8 +28,23 @@ class WorldImage {
 	public void drawImage(){
 		image.getGraphics().clearRect(0,0, world.getSize_X(), world.getSize_Y());
 		world.draw(image.getGraphics());
-		for(Drawable b: world.objects) {
-			b.draw(image.getGraphics());
+		for(Drawable d: sortObjects()){
+		    if(!(d instanceof AlwaysDraw)) d.draw(image.getGraphics());
+        }
+		for(Drawable d: sortObjects()){
+			if(d instanceof AlwaysDraw) d.draw(image.getGraphics());
 		}
 	}
+
+    private ArrayList<Drawable> sortObjects() {
+		ArrayList<Drawable> list = new ArrayList<>();
+		list = (ArrayList<Drawable>) world.objects.clone();
+		list.sort(new Comparator<Drawable>() {
+			@Override
+			public int compare(Drawable drawable, Drawable t1) {
+				return (int) (((PhysicsObject) drawable).getPos().getZ() - ((PhysicsObject) t1).getPos().getZ());
+			}
+		});
+	    return  list;
+    }
 }
