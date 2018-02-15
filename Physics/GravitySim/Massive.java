@@ -1,6 +1,6 @@
 package Physics.GravitySim;
 
-import Physics.Essentials.Vector;
+import Mathematics.Vector.Vector;
 
 public interface Massive {
     double getMass();

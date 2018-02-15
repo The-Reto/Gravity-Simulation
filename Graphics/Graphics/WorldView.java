@@ -6,7 +6,7 @@ import Physics.PhysicsWorld;
 import java.awt.*;
 
 public class WorldView extends Panel {
-    private WorldImage worldImage;
+    public WorldImage worldImage;
     private int size_X;
     private int size_Y;
     private int frameRate;

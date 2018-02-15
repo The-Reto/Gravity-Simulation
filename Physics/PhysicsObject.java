@@ -1,7 +1,8 @@
 package Physics;
 
 import Graphics.Graphics.Drawable;
-import Physics.Essentials.Vector;
+import Graphics.Graphics.GraphicsSettings3d;
+import Mathematics.Vector.Vector;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -57,5 +58,13 @@ public class PhysicsObject implements Drawable {
 
     public void frameCalculate(ArrayList<PhysicsObject> physicsObjectList, double secPerTick, double meterPerUnit, double kgPerMass) {}
 
-    public void draw(Graphics g) {if(!deactivated) g.fillOval((int) (pos.getX()-1),(int) (pos.getY()-1),2,2);}
+    public void draw(Graphics g) {
+        if(!deactivated) {
+            this.drawingOperation(g, GraphicsSettings3d.getImagePositionX(pos),GraphicsSettings3d.getImagePositionY(pos));
+        }
+    }
+
+    protected void drawingOperation(Graphics g, int x, int y){
+        g.fillOval(x - 1,y - 1,2,2);
+    }
 }
