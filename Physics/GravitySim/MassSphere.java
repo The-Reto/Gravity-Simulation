@@ -1,9 +1,10 @@
 package Physics.GravitySim;
 
+import Graphics.Graphics.WorldImage;
 import Physics.Essentials.PhysicsConstant;
 import Physics.Essentials.PhysicsEvent;
 import Physics.PhysicsObject;
-import Physics.Essentials.Vector;
+import Mathematics.Vector.Vector;
 import Physics.PhysicsWorld;
 
 import java.awt.*;
@@ -15,7 +16,7 @@ public class MassSphere extends PhysicsObject implements Massive {
     private double density;
     private Vector momentum;
 
-    public MassSphere(double mass, Vector momentum, Vector pos , double density) {
+    public MassSphere(double mass, Vector momentum, Vector pos, double density) {
         super(pos, true);
         this.density = density;
         this.mass = mass;
@@ -23,7 +24,7 @@ public class MassSphere extends PhysicsObject implements Massive {
         this.setRadius();
     }
 
-    public void addForce(Vector force){
+    public void addForce(Vector force) {
         momentum = this.getMomentum().add(force);
     }
 
@@ -35,25 +36,28 @@ public class MassSphere extends PhysicsObject implements Massive {
         return mass;
     }
 
-    public void setMass(double mass) {this.mass = mass;}
+    public void setMass(double mass) {
+        this.mass = mass;
+    }
 
-    public void setMomentum(Vector momentum) {this.momentum = momentum;}
+    public void setMomentum(Vector momentum) {
+        this.momentum = momentum;
+    }
 
     @Override
     public void frameCalculate(ArrayList<PhysicsObject> physicsObjectList, double secPerTick, double meterPerUnit, double kgPerMass) {
-        for(PhysicsObject b: physicsObjectList){
-            if(!b.deactivated) {
+        for (PhysicsObject b : physicsObjectList) {
+            if (!b.deactivated) {
                 if (b instanceof Massive && b != this) {
                     if (b.getPos().subtract(this.getPos()).abs() > this.getRadius() + ((MassSphere) b).getRadius()) {
                         Vector force = b.getPos().subtract(this.getPos()).norm();
-                        double factor = (secPerTick * secPerTick) * (kgPerMass * kgPerMass) * PhysicsConstant.G * this.getMass() * ((Massive) b).getMass() / Math.pow(meterPerUnit*b.getPos().subtract(this.getPos()).abs(), 2);
+                        double factor = (secPerTick * secPerTick) * (kgPerMass * kgPerMass) * PhysicsConstant.G * this.getMass() * ((Massive) b).getMass() / Math.pow(meterPerUnit * b.getPos().subtract(this.getPos()).abs(), 2);
                         force = force.scale(factor);
                         this.addForce(force);
-                    }
-                    else {
+                    } else {
                         double totalMass = this.getMass() + ((Massive) b).getMass();
-                        this.setPos(this.getPos().scale(this.getMass()).add(b.getPos().scale(((MassSphere) b).getMass())).scale(1d/totalMass));
-                        new PhysicsEvent(PhysicsEvent.EventType.COLLISION, String.format("at: X:%f  Y:%f",this.getPos().getX(), this.getPos().getY()), PhysicsWorld.timeElapsed);
+                        this.setPos(this.getPos().scale(this.getMass()).add(b.getPos().scale(((MassSphere) b).getMass())).scale(1d / totalMass));
+                        new PhysicsEvent(PhysicsEvent.EventType.COLLISION, String.format("at: %s", this.getPos().toString()), PhysicsWorld.timeElapsed);
                         this.setMass(totalMass);
                         this.setMomentum(this.getMomentum().add(((Massive) b).getMomentum()));
                         b.deactivated = true;
@@ -62,7 +66,7 @@ public class MassSphere extends PhysicsObject implements Massive {
                 }
             }
         }
-        this.setVelocity(momentum.scale(1d / (mass*kgPerMass)));
+        this.setVelocity(momentum.scale(1d / (mass * kgPerMass)));
         super.frameCalculate(physicsObjectList, secPerTick, meterPerUnit, kgPerMass);
     }
 
@@ -71,7 +75,7 @@ public class MassSphere extends PhysicsObject implements Massive {
     }
 
     private void setRadius() {
-        this.radius = Math.pow(3d*this.mass/(4d*this.density*Math.PI),1d/3d);
+        this.radius = Math.pow(3d * this.mass / (4d * this.density * Math.PI), 1d / 3d);
     }
 
     public double getDensity() {
@@ -82,12 +86,10 @@ public class MassSphere extends PhysicsObject implements Massive {
         this.density = density;
     }
 
-    public void draw(Graphics g){
-        if(!deactivated) {
-            g.setColor(Color.BLACK);
-            g.fillOval((int) ((this.getPos().getX()-radius) / PhysicsWorld.meterPerUnit), (int) ((this.getPos().getY()-radius) / PhysicsWorld.meterPerUnit),(int) (2*radius / PhysicsWorld.meterPerUnit), (int)(2*radius / PhysicsWorld.meterPerUnit));
-            g.setColor(Color.WHITE);
-            g.drawOval((int) ((this.getPos().getX()-radius) / PhysicsWorld.meterPerUnit), (int) ((this.getPos().getY()-radius) / PhysicsWorld.meterPerUnit),(int) (2*radius / PhysicsWorld.meterPerUnit), (int)(2*radius / PhysicsWorld.meterPerUnit));
-        }
+    protected void drawingOperation(Graphics g, int x, int y){
+        g.setColor(Color.BLACK);
+        g.fillOval((int) ((x - radius) / PhysicsWorld.meterPerUnit), (int) ((y - radius) / PhysicsWorld.meterPerUnit), (int) (2 * radius / PhysicsWorld.meterPerUnit), (int) (2 * radius / PhysicsWorld.meterPerUnit));
+        g.setColor(Color.WHITE);
+        g.drawOval((int) ((x - radius) / PhysicsWorld.meterPerUnit), (int) ((y - radius) / PhysicsWorld.meterPerUnit), (int) (2 * radius / PhysicsWorld.meterPerUnit), (int) (2 * radius / PhysicsWorld.meterPerUnit));
     }
 }

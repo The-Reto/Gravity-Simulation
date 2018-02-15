@@ -2,7 +2,7 @@ package Physics;
 
 import Graphics.Graphics.AlwaysDraw;
 import Graphics.Graphics.Drawable;
-import Physics.Essentials.Vector;
+import Mathematics.Vector.Vector;
 
 import java.awt.*;
 

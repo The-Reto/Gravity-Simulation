@@ -4,10 +4,13 @@ import Physics.PhysicsObject;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
-class WorldImage {
+public class WorldImage {
+
+	Comparator<Drawable> axisX = (d1, d2) -> (int) (((PhysicsObject) d1).getPos().getX() - ((PhysicsObject) d2).getPos().getX());
+	Comparator<Drawable> axisY = (d1, d2) -> (int) (((PhysicsObject) d1).getPos().getY() - ((PhysicsObject) d2).getPos().getY());
+	Comparator<Drawable> axisZ = (d1, d2) -> (int) (((PhysicsObject) d1).getPos().getZ() - ((PhysicsObject) d2).getPos().getZ());
 
 	BufferedImage image;
 	private DrawableWorld<Drawable> world;
@@ -16,6 +19,8 @@ class WorldImage {
 		image = new BufferedImage(gravitySimWorld.getSize_X(), gravitySimWorld.getSize_Y(), BufferedImage.TYPE_INT_ARGB);
 		this.world = gravitySimWorld;
 		image.getGraphics().clearRect(0,0, gravitySimWorld.getSize_X(), gravitySimWorld.getSize_Y());
+		GraphicsSettings3d.sizeX = image.getHeight();
+		GraphicsSettings3d.sizeY = image.getWidth();
 	}
 
 	public void toggleCoordinateGrid() {world.coordinateGrid = !world.coordinateGrid;}
@@ -39,12 +44,11 @@ class WorldImage {
     private ArrayList<Drawable> sortObjects() {
 		ArrayList<Drawable> list = new ArrayList<>();
 		list = (ArrayList<Drawable>) world.objects.clone();
-		list.sort(new Comparator<Drawable>() {
-			@Override
-			public int compare(Drawable drawable, Drawable t1) {
-				return (int) (((PhysicsObject) drawable).getPos().getZ() - ((PhysicsObject) t1).getPos().getZ());
-			}
-		});
+		switch (GraphicsSettings3d.myAxis) {
+			case X: list.sort(axisX);
+			case Y: list.sort(axisY);
+			case Z: list.sort(axisZ);
+		}
 	    return  list;
     }
 }
