@@ -8,7 +8,9 @@ public class PhysicsEvent {
         COLLISION,
         NEW_OBJECT,
         RESET,
-        READY
+        READY,
+        KEY_CHANGED,
+        ROTATION
     }
 
     EventType myType;

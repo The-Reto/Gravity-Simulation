@@ -2,7 +2,7 @@ package Physics;
 
 import Graphics.Graphics.Drawable;
 import Graphics.Graphics.GraphicsSettings3d;
-import Mathematics.Vector.Vector;
+import Mathematics.LinAlg.Vector.Vector;
 
 import java.awt.*;
 import java.util.ArrayList;

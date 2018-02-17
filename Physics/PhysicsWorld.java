@@ -3,7 +3,7 @@ package Physics;
 import Graphics.Graphics.DrawableWorld;
 import Physics.Essentials.PhysicsEvent;
 import Physics.Essentials.Time;
-import Mathematics.Vector.Vector;
+import Mathematics.LinAlg.Vector.Vector;
 import Physics.GravitySim.MassSphere;
 import Physics.GravitySim.Massive;
 

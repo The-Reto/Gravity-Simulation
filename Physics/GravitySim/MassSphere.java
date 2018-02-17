@@ -1,10 +1,9 @@
 package Physics.GravitySim;
 
-import Graphics.Graphics.WorldImage;
 import Physics.Essentials.PhysicsConstant;
 import Physics.Essentials.PhysicsEvent;
 import Physics.PhysicsObject;
-import Mathematics.Vector.Vector;
+import Mathematics.LinAlg.Vector.Vector;
 import Physics.PhysicsWorld;
 
 import java.awt.*;

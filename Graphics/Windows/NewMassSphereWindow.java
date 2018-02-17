@@ -2,7 +2,7 @@ package Graphics.Windows;
 
 import Graphics.UI.TextEntry;
 import Graphics.UI.UIpanel;
-import Mathematics.Vector.Vector;
+import Mathematics.LinAlg.Vector.Vector;
 import Physics.PhysicsWorld;
 
 import java.awt.*;

@@ -23,7 +23,7 @@ public class WorldImage {
 		GraphicsSettings3d.sizeY = image.getWidth();
 	}
 
-	public void toggleCoordinateGrid() {world.coordinateGrid = !world.coordinateGrid;}
+	public void toggleCoordinateGrid() {world.displayOrigin = !world.displayOrigin;}
 
 	public void drawDisabled(){
 		image.getGraphics().clearRect(0,0, world.getSize_X(), world.getSize_Y());
@@ -42,13 +42,19 @@ public class WorldImage {
 	}
 
     private ArrayList<Drawable> sortObjects() {
-		ArrayList<Drawable> list = new ArrayList<>();
+		ArrayList<Drawable> list;
 		list = (ArrayList<Drawable>) world.objects.clone();
-		switch (GraphicsSettings3d.myAxis) {
+		/*switch (GraphicsSettings3d.myAxis) {
 			case X: list.sort(axisX);
 			case Y: list.sort(axisY);
 			case Z: list.sort(axisZ);
-		}
+		}*/
+		list.sort(new Comparator<Drawable>() {
+			@Override
+			public int compare(Drawable d1, Drawable d2) {
+				return (int) (GraphicsSettings3d.viewPlane.distance(((PhysicsObject) d1).getPos()) - GraphicsSettings3d.viewPlane.distance(((PhysicsObject) d2).getPos()));
+			}
+		});
 	    return  list;
     }
 }
